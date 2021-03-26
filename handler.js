@@ -1,7 +1,6 @@
 'use strict';
 
 const AWS = require('aws-sdk');
-// const credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
 
 AWS.config.update({
   region: 'us-east-1',
@@ -15,7 +14,6 @@ const params = {
   Item: {
     'MESSAGE': { S: 'This is the default message to data service 1.' },
     'AUTHOR': { S: 'Vincent Pham' },
-    // 'CREATED_AT': new Date().toUTCString(),
   }
 }
 
@@ -98,39 +96,5 @@ module.exports.getDynamoItem = async (event) => {
     });
   }
 
-  // // Call DynamoDB to add the item to the table 
-  // const result = await new Promise((resolve, reject) => {
-  //   ddb.putItem(params, function (error, data) {
-  //     if (error) {
-  //       console.log("🚀 ~ file: handler.js ~ line 26 ~ ddb.putItem ~ error", error);
-  //       resolve({
-  //         statusCode: 500,
-  //         body: JSON.stringify(
-  //           {
-  //             message: 'There was an error during saving the message to data service 1.',
-  //             stack: error,
-  //           },
-  //           null,
-  //           2
-  //         ),
-  //       });
-  //     } else {
-  //       console.log("🚀 ~ file: handler.js ~ line 25 ~ data", data)
-  //       resolve({
-  //         statusCode: 200,
-  //         body: JSON.stringify(
-  //           {
-  //             message: params.Item.MESSAGE,
-  //           },
-  //           null,
-  //           2
-  //         ),
-  //       });
-  //     }
-  //   });
-  // });
-
   return { status: 200 };
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };

@@ -181,7 +181,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-test/dev/1616743720646-2021-03-26T07:28:40.646Z/serverless-test.zip"
+                "S3Key": "serverless/serverless-test/dev/1616744822482-2021-03-26T07:47:02.482Z/serverless-test.zip"
               },
               "Handler": "handler.putDynamoItem",
               "Runtime": "nodejs12.x",
@@ -206,7 +206,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-test/dev/1616743720646-2021-03-26T07:28:40.646Z/serverless-test.zip"
+                "S3Key": "serverless/serverless-test/dev/1616744822482-2021-03-26T07:47:02.482Z/serverless-test.zip"
               },
               "Handler": "handler.getDynamoItem",
               "Runtime": "nodejs12.x",
@@ -522,7 +522,7 @@
     "artifact": "/mnt/c/Users/nhat.pham/vincentpham13/serverless-service1-test/.serverless/serverless-test.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-test/dev/1616743720646-2021-03-26T07:28:40.646Z",
+    "artifactDirectoryName": "serverless/serverless-test/dev/1616744822482-2021-03-26T07:47:02.482Z",
     "artifact": "serverless-test.zip"
   }
 }
