@@ -40,10 +40,10 @@ provider:
           Action:
             - dynamodb:PutItem
           Resource: ${self:custom.infrastructure.Service1TableArn}
-        # - Effect: Allow
-        #   Action:
-        #     - sns:Publish
-        #   Resource: ${self:custom.infrastructure.Service1TopicArn}
+        - Effect: Allow
+          Action:
+            - sns:Publish
+          Resource: ${self:custom.infrastructure.Service1TopicArn}
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1

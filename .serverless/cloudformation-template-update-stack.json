@@ -150,6 +150,13 @@
                 {
                   "Effect": "Allow",
                   "Action": [
+                    "sns:Publish"
+                  ],
+                  "Resource": "arn:aws:sns:us-east-1:653332051596:service1-topic"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
                     "dynamodb:GetRecords",
                     "dynamodb:GetShardIterator",
                     "dynamodb:DescribeStream",
@@ -186,7 +193,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-service0-api/dev/1617011766935-2021-03-29T09:56:06.935Z/serverless-service0-api.zip"
+          "S3Key": "serverless/serverless-service0-api/dev/1617030708285-2021-03-29T15:11:48.285Z/serverless-service0-api.zip"
         },
         "Handler": "handler.putDynamoItem",
         "Runtime": "nodejs12.x",
@@ -211,7 +218,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/serverless-service0-api/dev/1617011766935-2021-03-29T09:56:06.935Z/serverless-service0-api.zip"
+          "S3Key": "serverless/serverless-service0-api/dev/1617030708285-2021-03-29T15:11:48.285Z/serverless-service0-api.zip"
         },
         "Handler": "handler.getDynamoItem",
         "Runtime": "nodejs12.x",
@@ -229,24 +236,24 @@
         "GetDynamoItemLogGroup"
       ]
     },
-    "PutDynamoItemLambdaVersionnrvfubNzYywSNcC92q5b118koRV2ca1y9cJTrPLdQs": {
+    "PutDynamoItemLambdaVersionuAZQs00clQjt3qzOx6aooBGcNwoRcgc2Ny7ZAXmcGAE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PutDynamoItemLambdaFunction"
         },
-        "CodeSha256": "E3xSK4aM5KxPUqyDJurL49L9oVMx87qpFpN/kvoYJDM="
+        "CodeSha256": "qNmCnAmWJaaX/ud8/RQx7GHm5OiY+nrvmS+VUyWEF8c="
       }
     },
-    "GetDynamoItemLambdaVersion5lNgj0fZbSp2k8pEkQQLzl2vNWDLQtUMLPKaNZ9MaVU": {
+    "GetDynamoItemLambdaVersionVgWpAQeSvyCbU95Zd6dl1NfWznchWC7UW2nxUsnnKs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDynamoItemLambdaFunction"
         },
-        "CodeSha256": "E3xSK4aM5KxPUqyDJurL49L9oVMx87qpFpN/kvoYJDM="
+        "CodeSha256": "qNmCnAmWJaaX/ud8/RQx7GHm5OiY+nrvmS+VUyWEF8c="
       }
     },
     "ApiGatewayRestApi": {
@@ -319,7 +326,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1617011763752": {
+    "ApiGatewayDeployment1617030706285": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -396,13 +403,13 @@
     "PutDynamoItemLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PutDynamoItemLambdaVersionnrvfubNzYywSNcC92q5b118koRV2ca1y9cJTrPLdQs"
+        "Ref": "PutDynamoItemLambdaVersionuAZQs00clQjt3qzOx6aooBGcNwoRcgc2Ny7ZAXmcGAE"
       }
     },
     "GetDynamoItemLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDynamoItemLambdaVersion5lNgj0fZbSp2k8pEkQQLzl2vNWDLQtUMLPKaNZ9MaVU"
+        "Ref": "GetDynamoItemLambdaVersionVgWpAQeSvyCbU95Zd6dl1NfWznchWC7UW2nxUsnnKs"
       }
     },
     "ServiceEndpoint": {
