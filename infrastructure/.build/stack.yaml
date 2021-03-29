@@ -1,0 +1,5 @@
+Service1TopicArn: 'arn:aws:sns:us-east-1:653332051596:service1-topic'
+Service1TableArn: 'arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1'
+ServerlessDeploymentBucketName: serverless-service0-infr-serverlessdeploymentbuck-10wk1y91a0yna
+Service1TableName: db-service-1
+Service1TableStreamArn: 'arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1/stream/2021-03-29T09:12:51.613'

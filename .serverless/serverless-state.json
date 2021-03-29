@@ -1,13 +1,26 @@
 {
   "service": {
-    "service": "serverless-test",
+    "service": "serverless-service0-api",
     "serviceObject": {
-      "name": "serverless-test"
+      "name": "serverless-service0-api"
     },
     "provider": {
       "name": "aws",
       "runtime": "nodejs12.x",
       "lambdaHashingVersion": "20201221",
+      "iam": {
+        "role": {
+          "statements": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:PutItem"
+              ],
+              "Resource": "arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1"
+            }
+          ]
+        }
+      },
       "stage": "dev",
       "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
       "region": "us-east-1",
@@ -88,13 +101,13 @@
           "PutDynamoItemLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-test-dev-putDynamoItem"
+              "LogGroupName": "/aws/lambda/serverless-service0-api-dev-putDynamoItem"
             }
           },
           "GetDynamoItemLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-test-dev-getDynamoItem"
+              "LogGroupName": "/aws/lambda/serverless-service0-api-dev-getDynamoItem"
             }
           },
           "IamRoleLambdaExecution": {
@@ -122,7 +135,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-test",
+                        "serverless-service0-api",
                         "dev",
                         "lambda"
                       ]
@@ -139,7 +152,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-test-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-service0-api-dev*:*"
                           }
                         ]
                       },
@@ -150,8 +163,23 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-test-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-service0-api-dev*:*:*"
                           }
+                        ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iam\"][\"role\"][\"statements\"][0]"
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "dynamodb:GetRecords",
+                          "dynamodb:GetShardIterator",
+                          "dynamodb:DescribeStream",
+                          "dynamodb:ListStreams"
+                        ],
+                        "Resource": [
+                          "arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1/stream/2021-03-29T09:12:51.613"
                         ]
                       }
                     ]
@@ -163,7 +191,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-test",
+                    "serverless-service0-api",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -181,11 +209,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-test/dev/1616744822482-2021-03-26T07:47:02.482Z/serverless-test.zip"
+                "S3Key": "serverless/serverless-service0-api/dev/1617011766935-2021-03-29T09:56:06.935Z/serverless-service0-api.zip"
               },
               "Handler": "handler.putDynamoItem",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-test-dev-putDynamoItem",
+              "FunctionName": "serverless-service0-api-dev-putDynamoItem",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -206,11 +234,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-test/dev/1616744822482-2021-03-26T07:47:02.482Z/serverless-test.zip"
+                "S3Key": "serverless/serverless-service0-api/dev/1617011766935-2021-03-29T09:56:06.935Z/serverless-service0-api.zip"
               },
               "Handler": "handler.getDynamoItem",
               "Runtime": "nodejs12.x",
-              "FunctionName": "serverless-test-dev-getDynamoItem",
+              "FunctionName": "serverless-service0-api-dev-getDynamoItem",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -224,47 +252,109 @@
               "GetDynamoItemLogGroup"
             ]
           },
-          "PutDynamoItemLambdaVersionSyimroNX0sZdAWvsyl5kK8iVsmsdqGQI2O1iztjZY0": {
+          "PutDynamoItemLambdaVersionnrvfubNzYywSNcC92q5b118koRV2ca1y9cJTrPLdQs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PutDynamoItemLambdaFunction"
               },
-              "CodeSha256": "qFqC0tzyWLTOYj+Wt8rGjDZDeq1OCF+g0ydsZToheX8="
+              "CodeSha256": "E3xSK4aM5KxPUqyDJurL49L9oVMx87qpFpN/kvoYJDM="
             }
           },
-          "GetDynamoItemLambdaVersionv1EFJpPAPbFso5LehikntFowG3A27xmO99mtse7UUE": {
+          "GetDynamoItemLambdaVersion5lNgj0fZbSp2k8pEkQQLzl2vNWDLQtUMLPKaNZ9MaVU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetDynamoItemLambdaFunction"
               },
-              "CodeSha256": "qFqC0tzyWLTOYj+Wt8rGjDZDeq1OCF+g0ydsZToheX8="
+              "CodeSha256": "E3xSK4aM5KxPUqyDJurL49L9oVMx87qpFpN/kvoYJDM="
             }
           },
-          "HttpApi": {
-            "Type": "AWS::ApiGatewayV2::Api",
+          "ApiGatewayRestApi": {
+            "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-serverless-test",
-              "ProtocolType": "HTTP"
-            }
-          },
-          "HttpApiStage": {
-            "Type": "AWS::ApiGatewayV2::Stage",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
+              "Name": "dev-serverless-service0-api",
+              "EndpointConfiguration": {
+                "Types": [
+                  "EDGE"
+                ]
               },
-              "StageName": "$default",
-              "AutoDeploy": true,
-              "DefaultRouteSettings": {
-                "DetailedMetricsEnabled": false
+              "Policy": ""
+            }
+          },
+          "ApiGatewayResourceTrigger": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "trigger",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "PutDynamoItemLambdaPermissionHttpApi": {
+          "ApiGatewayMethodTriggerGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceTrigger"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "PutDynamoItemLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1617011763752": {
+            "Type": "AWS::ApiGateway::Deployment",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "StageName": "dev"
+            },
+            "DependsOn": [
+              "ApiGatewayMethodTriggerGet"
+            ]
+          },
+          "PutDynamoItemLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -293,48 +383,31 @@
                     },
                     ":",
                     {
-                      "Ref": "HttpApi"
+                      "Ref": "ApiGatewayRestApi"
                     },
-                    "/*"
+                    "/*/*"
                   ]
                 ]
               }
             }
           },
-          "HttpApiIntegrationPutDynamoItem": {
-            "Type": "AWS::ApiGatewayV2::Integration",
+          "GetDynamoItemEventSourceMappingDynamodbDbservice1": {
+            "Type": "AWS::Lambda::EventSourceMapping",
+            "DependsOn": [
+              "IamRoleLambdaExecution"
+            ],
             "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "IntegrationType": "AWS_PROXY",
-              "IntegrationUri": {
-                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"PutDynamoItemLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
-              },
-              "PayloadFormatVersion": "2.0",
-              "TimeoutInMillis": 6500
-            }
-          },
-          "HttpApiRouteGetTrigger": {
-            "Type": "AWS::ApiGatewayV2::Route",
-            "Properties": {
-              "ApiId": {
-                "Ref": "HttpApi"
-              },
-              "RouteKey": "GET /trigger",
-              "Target": {
-                "Fn::Join": [
-                  "/",
-                  [
-                    "integrations",
-                    {
-                      "Ref": "HttpApiIntegrationPutDynamoItem"
-                    }
-                  ]
+              "BatchSize": 10,
+              "EventSourceArn": "arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1/stream/2021-03-29T09:12:51.613",
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetDynamoItemLambdaFunction",
+                  "Arn"
                 ]
-              }
-            },
-            "DependsOn": "HttpApiIntegrationPutDynamoItem"
+              },
+              "StartingPosition": "TRIM_HORIZON",
+              "Enabled": true
+            }
           }
         },
         "Outputs": {
@@ -346,30 +419,24 @@
           "PutDynamoItemLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PutDynamoItemLambdaVersionSyimroNX0sZdAWvsyl5kK8iVsmsdqGQI2O1iztjZY0"
+              "Ref": "PutDynamoItemLambdaVersionnrvfubNzYywSNcC92q5b118koRV2ca1y9cJTrPLdQs"
             }
           },
           "GetDynamoItemLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetDynamoItemLambdaVersionv1EFJpPAPbFso5LehikntFowG3A27xmO99mtse7UUE"
+              "Ref": "GetDynamoItemLambdaVersion5lNgj0fZbSp2k8pEkQQLzl2vNWDLQtUMLPKaNZ9MaVU"
             }
           },
-          "HttpApiId": {
-            "Description": "Id of the HTTP API",
-            "Value": {
-              "Ref": "HttpApi"
-            }
-          },
-          "HttpApiUrl": {
-            "Description": "URL of the HTTP API",
+          "ServiceEndpoint": {
+            "Description": "URL of the service endpoint",
             "Value": {
               "Fn::Join": [
                 "",
                 [
                   "https://",
                   {
-                    "Ref": "HttpApi"
+                    "Ref": "ApiGatewayRestApi"
                   },
                   ".execute-api.",
                   {
@@ -378,7 +445,8 @@
                   ".",
                   {
                     "Ref": "AWS::URLSuffix"
-                  }
+                  },
+                  "/dev"
                 ]
               ]
             }
@@ -469,39 +537,55 @@
       },
       "vpc": {}
     },
+    "custom": {
+      "infrastructure": {
+        "Service1TopicArn": "arn:aws:sns:us-east-1:653332051596:service1-topic",
+        "Service1TableArn": "arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1",
+        "ServerlessDeploymentBucketName": "serverless-service0-infr-serverlessdeploymentbuck-10wk1y91a0yna",
+        "Service1TableName": "db-service-1",
+        "Service1TableStreamArn": "arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1/stream/2021-03-29T09:12:51.613"
+      }
+    },
     "pluginsData": {},
     "functions": {
       "putDynamoItem": {
         "handler": "handler.putDynamoItem",
         "events": [
           {
-            "httpApi": {
-              "path": "/trigger",
-              "method": "GET"
-            },
-            "resolvedMethod": "GET",
-            "resolvedPath": "/trigger"
+            "http": {
+              "path": "trigger",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
           }
         ],
-        "name": "serverless-test-dev-putDynamoItem",
+        "name": "serverless-service0-api-dev-putDynamoItem",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "PutDynamoItemLambdaVersionSyimroNX0sZdAWvsyl5kK8iVsmsdqGQI2O1iztjZY0"
+        "versionLogicalId": "PutDynamoItemLambdaVersionnrvfubNzYywSNcC92q5b118koRV2ca1y9cJTrPLdQs"
       },
       "getDynamoItem": {
         "handler": "handler.getDynamoItem",
-        "events": [],
-        "name": "serverless-test-dev-getDynamoItem",
+        "events": [
+          {
+            "stream": "arn:aws:dynamodb:us-east-1:653332051596:table/db-service-1/stream/2021-03-29T09:12:51.613"
+          }
+        ],
+        "name": "serverless-service0-api-dev-getDynamoItem",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetDynamoItemLambdaVersionv1EFJpPAPbFso5LehikntFowG3A27xmO99mtse7UUE"
+        "versionLogicalId": "GetDynamoItemLambdaVersion5lNgj0fZbSp2k8pEkQQLzl2vNWDLQtUMLPKaNZ9MaVU"
       }
+    },
+    "resources": {
+      "Resources": {},
+      "Outputs": {}
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
@@ -514,15 +598,21 @@
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
       },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
+      },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "resources": {
+        "$ref": "$[\"service\"][\"resources\"]"
       }
     },
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/mnt/c/Users/nhat.pham/vincentpham13/serverless-service1-test/.serverless/serverless-test.zip"
+    "artifact": "/mnt/c/Users/nhat.pham/vincentpham13/serverless-service1-test/.serverless/serverless-service0-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-test/dev/1616744822482-2021-03-26T07:47:02.482Z",
-    "artifact": "serverless-test.zip"
+    "artifactDirectoryName": "serverless/serverless-service0-api/dev/1617011766935-2021-03-29T09:56:06.935Z",
+    "artifact": "serverless-service0-api.zip"
   }
 }

@@ -28,6 +28,7 @@ module.exports.putDynamoItem = async (event) => {
 
   // Call DynamoDB to add the item to the table 
   const result = await new Promise((resolve, reject) => {
+    console.log('process.env', process.env);
     ddb.putItem(params, function (error, data) {
       if (error) {
         console.log("🚀 ~ file: handler.js ~ line 26 ~ ddb.putItem ~ error", error);
